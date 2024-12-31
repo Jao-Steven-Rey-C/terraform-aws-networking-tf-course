@@ -1,4 +1,5 @@
 variable "vpc_attributes" {
+  description = "Contains VPC's CIDR block and name."
   type = object({
     cidr_block = string
     name       = string
@@ -15,6 +16,12 @@ data "aws_availability_zones" "available" { # All of the available AZs.
 }
 
 variable "subnet_attributes" {
+  description = <<EOT
+  "Contains configuration on subnets: 
+  cidr_block        : The subnet's CIDR block
+  az                : The subnet's availability zone
+  Public            : Whether subnet it public or private (default is private)
+  EOT 
   type = map(object({
     cidr_block = string
     az         = string
